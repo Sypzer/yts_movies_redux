@@ -4,14 +4,14 @@ class GetMovies {
   const GetMovies();
 }
 
-class GetMoviesSuccessfull {
-  GetMoviesSuccessfull(this.movies);
+class GetMoviesSuccessful {
+  GetMoviesSuccessful(this.movies);
 
   final List<Movie> movies;
 
   @override
   String toString() {
-    return 'GetMoviesSuccessfull{movies: $movies}';
+    return 'GetMoviesSuccessful{movies: $movies}';
   }
 }
 

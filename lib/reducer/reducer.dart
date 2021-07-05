@@ -6,7 +6,7 @@ import 'package:yts_movies_redux/models/app_state.dart';
 
 Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
   TypedReducer<AppState, GetMovies>(_getMovies),
-  TypedReducer<AppState, GetMoviesSuccessfull>(_getMoviesSuccessful),
+  TypedReducer<AppState, GetMoviesSuccessful>(_getMoviesSuccessful),
   TypedReducer<AppState, GetMoviesError>(_getMoviesError),
   TypedReducer<AppState, UpdateGenre>(_updateGenre),
   TypedReducer<AppState, UpdateQuality>(_updateQuality),
@@ -18,18 +18,18 @@ AppState _getMovies(AppState state, GetMovies action) {
   return builder.build();
 }
 
-AppState _getMoviesSuccessful(AppState state, GetMoviesSuccessfull action) {
+AppState _getMoviesSuccessful(AppState state, GetMoviesSuccessful action) {
   final AppStateBuilder builder = state.toBuilder();
-  if(builder.mustResetMovies){
+  if (state.mustResetMovies) {
     builder
       ..mustResetMovies = false
-      ..nextPage = builder.nextPage + 1
-      ..isLoading = false;
-      builder.movies.clear();
-      builder.movies.addAll(action.movies);
-  }else{
+      ..nextPage = state.nextPage + 1
+      ..isLoading = false
+      ..movies.clear()
+      ..movies.addAll(action.movies);
+  } else {
     builder
-      ..nextPage = builder.nextPage + 1
+      ..nextPage = state.nextPage + 1
       ..isLoading = false
       ..movies.addAll(action.movies);
   }

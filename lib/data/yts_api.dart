@@ -7,7 +7,7 @@ class YtsApi {
   YtsApi({required Client client}) : _client = client;
   final Client _client;
 
-  Future<List<Movie>> getMovies(int page, String genre, String quality) async {
+  Future<List<Movie>> getMovies(int page, String? genre, String? quality) async {
     final Uri url = Uri(
       scheme: 'https', //
       host: 'yts.mx',

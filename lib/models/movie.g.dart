@@ -15,9 +15,9 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
   final String wireName = 'Movie';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Movie object,
+  Iterable<Object?> serialize(Serializers serializers, Movie object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
@@ -44,7 +44,7 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
   }
 
   @override
-  Movie deserialize(Serializers serializers, Iterable<Object> serialized,
+  Movie deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MovieBuilder();
 
@@ -52,7 +52,7 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'title':
           result.title = serializers.deserialize(value,
@@ -60,9 +60,9 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
           break;
         case 'genres':
           result.genres.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'summary':
           result.summary = serializers.deserialize(value,
@@ -107,17 +107,17 @@ class _$Movie extends Movie {
   @override
   final int year;
 
-  factory _$Movie([void Function(MovieBuilder) updates]) =>
+  factory _$Movie([void Function(MovieBuilder)? updates]) =>
       (new MovieBuilder()..update(updates)).build();
 
   _$Movie._(
-      {this.title,
-      this.genres,
-      this.summary,
-      this.largeCoverImage,
-      this.rating,
-      this.runtime,
-      this.year})
+      {required this.title,
+      required this.genres,
+      required this.summary,
+      required this.largeCoverImage,
+      required this.rating,
+      required this.runtime,
+      required this.year})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(title, 'Movie', 'title');
     BuiltValueNullFieldError.checkNotNull(genres, 'Movie', 'genres');
@@ -178,37 +178,37 @@ class _$Movie extends Movie {
 }
 
 class MovieBuilder implements Builder<Movie, MovieBuilder> {
-  _$Movie _$v;
+  _$Movie? _$v;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
+  String? _title;
+  String? get title => _$this._title;
+  set title(String? title) => _$this._title = title;
 
-  ListBuilder<String> _genres;
+  ListBuilder<String>? _genres;
   ListBuilder<String> get genres =>
       _$this._genres ??= new ListBuilder<String>();
-  set genres(ListBuilder<String> genres) => _$this._genres = genres;
+  set genres(ListBuilder<String>? genres) => _$this._genres = genres;
 
-  String _summary;
-  String get summary => _$this._summary;
-  set summary(String summary) => _$this._summary = summary;
+  String? _summary;
+  String? get summary => _$this._summary;
+  set summary(String? summary) => _$this._summary = summary;
 
-  String _largeCoverImage;
-  String get largeCoverImage => _$this._largeCoverImage;
-  set largeCoverImage(String largeCoverImage) =>
+  String? _largeCoverImage;
+  String? get largeCoverImage => _$this._largeCoverImage;
+  set largeCoverImage(String? largeCoverImage) =>
       _$this._largeCoverImage = largeCoverImage;
 
-  double _rating;
-  double get rating => _$this._rating;
-  set rating(double rating) => _$this._rating = rating;
+  double? _rating;
+  double? get rating => _$this._rating;
+  set rating(double? rating) => _$this._rating = rating;
 
-  int _runtime;
-  int get runtime => _$this._runtime;
-  set runtime(int runtime) => _$this._runtime = runtime;
+  int? _runtime;
+  int? get runtime => _$this._runtime;
+  set runtime(int? runtime) => _$this._runtime = runtime;
 
-  int _year;
-  int get year => _$this._year;
-  set year(int year) => _$this._year = year;
+  int? _year;
+  int? get year => _$this._year;
+  set year(int? year) => _$this._year = year;
 
   MovieBuilder();
 
@@ -234,7 +234,7 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
   }
 
   @override
-  void update(void Function(MovieBuilder) updates) {
+  void update(void Function(MovieBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -258,7 +258,7 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
               year:
                   BuiltValueNullFieldError.checkNotNull(year, 'Movie', 'year'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'genres';
         genres.build();

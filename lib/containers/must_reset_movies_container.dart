@@ -5,6 +5,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:yts_movies_redux/models/app_state.dart';
 
+import '../models/app_state.dart';
+
 
 class MustResetMoviesContainer extends StatelessWidget {
   const MustResetMoviesContainer({Key key,@required this.builder}) : super(key: key);
@@ -13,7 +15,7 @@ class MustResetMoviesContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector(builder: builder, converter: (Store<AppState> store){
+    return StoreConnector<AppState,bool>(builder: builder, converter: (Store<AppState> store){
       return store.state.mustResetMovies;
     });
   }

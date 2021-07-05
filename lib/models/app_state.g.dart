@@ -15,9 +15,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
   final String wireName = 'AppState';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppState object,
+  Iterable<Object?> serialize(Serializers serializers, AppState object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
+    final result = <Object?>[
       'movies',
       serializers.serialize(object.movies,
           specifiedType:
@@ -32,7 +32,7 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       serializers.serialize(object.mustResetMovies,
           specifiedType: const FullType(bool)),
     ];
-    Object value;
+    Object? value;
     value = object.genre;
     if (value != null) {
       result
@@ -51,7 +51,7 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
   }
 
   @override
-  AppState deserialize(Serializers serializers, Iterable<Object> serialized,
+  AppState deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AppStateBuilder();
 
@@ -59,13 +59,13 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'movies':
           result.movies.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(BuiltList, const [const FullType(Movie)]))
-              as BuiltList<Object>);
+                      const FullType(BuiltList, const [const FullType(Movie)]))!
+              as BuiltList<Object?>);
           break;
         case 'isLoading':
           result.isLoading = serializers.deserialize(value,
@@ -73,11 +73,11 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           break;
         case 'genre':
           result.genre = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'quality':
           result.quality = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'nextPage':
           result.nextPage = serializers.deserialize(value,
@@ -100,24 +100,24 @@ class _$AppState extends AppState {
   @override
   final bool isLoading;
   @override
-  final String genre;
+  final String? genre;
   @override
-  final String quality;
+  final String? quality;
   @override
   final int nextPage;
   @override
   final bool mustResetMovies;
 
-  factory _$AppState([void Function(AppStateBuilder) updates]) =>
+  factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {this.movies,
-      this.isLoading,
+      {required this.movies,
+      required this.isLoading,
       this.genre,
       this.quality,
-      this.nextPage,
-      this.mustResetMovies})
+      required this.nextPage,
+      required this.mustResetMovies})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(movies, 'AppState', 'movies');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'AppState', 'isLoading');
@@ -171,31 +171,31 @@ class _$AppState extends AppState {
 }
 
 class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
-  _$AppState _$v;
+  _$AppState? _$v;
 
-  ListBuilder<Movie> _movies;
+  ListBuilder<Movie>? _movies;
   ListBuilder<Movie> get movies => _$this._movies ??= new ListBuilder<Movie>();
-  set movies(ListBuilder<Movie> movies) => _$this._movies = movies;
+  set movies(ListBuilder<Movie>? movies) => _$this._movies = movies;
 
-  bool _isLoading;
-  bool get isLoading => _$this._isLoading;
-  set isLoading(bool isLoading) => _$this._isLoading = isLoading;
+  bool? _isLoading;
+  bool? get isLoading => _$this._isLoading;
+  set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
-  String _genre;
-  String get genre => _$this._genre;
-  set genre(String genre) => _$this._genre = genre;
+  String? _genre;
+  String? get genre => _$this._genre;
+  set genre(String? genre) => _$this._genre = genre;
 
-  String _quality;
-  String get quality => _$this._quality;
-  set quality(String quality) => _$this._quality = quality;
+  String? _quality;
+  String? get quality => _$this._quality;
+  set quality(String? quality) => _$this._quality = quality;
 
-  int _nextPage;
-  int get nextPage => _$this._nextPage;
-  set nextPage(int nextPage) => _$this._nextPage = nextPage;
+  int? _nextPage;
+  int? get nextPage => _$this._nextPage;
+  set nextPage(int? nextPage) => _$this._nextPage = nextPage;
 
-  bool _mustResetMovies;
-  bool get mustResetMovies => _$this._mustResetMovies;
-  set mustResetMovies(bool mustResetMovies) =>
+  bool? _mustResetMovies;
+  bool? get mustResetMovies => _$this._mustResetMovies;
+  set mustResetMovies(bool? mustResetMovies) =>
       _$this._mustResetMovies = mustResetMovies;
 
   AppStateBuilder();
@@ -221,7 +221,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   }
 
   @override
-  void update(void Function(AppStateBuilder) updates) {
+  void update(void Function(AppStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -241,7 +241,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               mustResetMovies: BuiltValueNullFieldError.checkNotNull(
                   mustResetMovies, 'AppState', 'mustResetMovies'));
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'movies';
         movies.build();

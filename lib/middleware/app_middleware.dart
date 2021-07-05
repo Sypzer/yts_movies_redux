@@ -22,7 +22,7 @@ class AppMiddleware {
     ];
   }
 
-  _getMovies(
+  Future<void>_getMovies(
       Store<AppState> store, GetMovies action, NextDispatcher next) async {
     print(action);
     next(action);
@@ -39,12 +39,12 @@ class AppMiddleware {
   }
 
 
-  void _updateGenre(Store<AppState> store, UpdateGenre action, next) {
+  void _updateGenre(Store<AppState> store, UpdateGenre action, NextDispatcher next) {
     next(action);
     print(action);
   }
 
-  void _updateQuality(Store<AppState> store, UpdateQuality action, next) {
+  void _updateQuality(Store<AppState> store, UpdateQuality action, NextDispatcher next) {
     next(action);
     print(action);
   }

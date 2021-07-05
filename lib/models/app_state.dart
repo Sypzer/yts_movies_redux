@@ -12,17 +12,15 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   factory AppState([void Function(AppStateBuilder b) updates]) = _$AppState;
 
   factory AppState.initialState() {
-    final AppStateBuilder builder = AppStateBuilder();
-    builder
-      ..mustResetMovies = false
-      ..genre = null
-      ..isLoading = true
-      ..nextPage = 1;
-    return builder.build();
+    return AppState((AppStateBuilder b) {
+      b
+        ..mustResetMovies = false
+        ..isLoading = true
+        ..nextPage = 1;
+    });
   }
 
-  factory AppState.fromJson(dynamic json) =>
-      serializers.deserializeWith(serializer, json);
+  factory AppState.fromJson(dynamic json) => serializers.deserializeWith(serializer, json)!;
 
   AppState._();
 
@@ -30,18 +28,15 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   bool get isLoading;
 
-  @nullable
-  String get genre;
+  String? get genre;
 
-  @nullable
-  String get quality;
+  String? get quality;
 
   int get nextPage;
 
   bool get mustResetMovies;
 
-
-  Map<String, dynamic> get json => serializers.serializeWith(serializer, this);
+  Map<String, dynamic> get json => serializers.serializeWith(serializer, this)! as Map<String, dynamic>;
 
   static Serializer<AppState> get serializer => _$appStateSerializer;
 }

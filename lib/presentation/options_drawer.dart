@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:yts_movies_redux/actions/get_movies.dart';
-import 'package:yts_movies_redux/actions/update_genre.dart';
-import 'package:yts_movies_redux/actions/update_quality.dart';
+import 'package:yts_movies_redux/actions/index.dart';
 import 'package:yts_movies_redux/containers/genre_container.dart';
 import 'package:yts_movies_redux/containers/quality_container.dart';
 import 'package:yts_movies_redux/models/app_state.dart';
 
 class OptionsDrawer extends StatefulWidget {
+  const OptionsDrawer({Key? key}) : super(key: key);
+
   @override
   _OptionsDrawerState createState() => _OptionsDrawerState();
 }
@@ -39,17 +39,17 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
     return Drawer(
       child: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 64,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: GenreContainer(
-              builder: (BuildContext context, String storeGenre) {
+              builder: (BuildContext context, String? storeGenre) {
                 return Row(
                   children: <Widget>[
                     const Text('GENRE: '),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     Expanded(
@@ -62,9 +62,8 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
                               ),
                             )
                             .toList(),
-                        onChanged: (String toChangeGenre) {
-                          StoreProvider.of<AppState>(context)
-                              .dispatch(UpdateGenre(toChangeGenre));
+                        onChanged: (String? toChangeGenre) {
+                          StoreProvider.of<AppState>(context).dispatch(UpdateQueryFields(genre: toChangeGenre));
                         },
                         value: storeGenre,
                       ),
@@ -74,17 +73,17 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: QualityContainer(
-              builder: (BuildContext context, String storeQuality) {
+              builder: (BuildContext context, String? storeQuality) {
                 return Row(
                   children: <Widget>[
                     const Text('Quality: '),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     Expanded(
@@ -97,9 +96,8 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
                               ),
                             )
                             .toList(),
-                        onChanged: (String toChangeQuality) {
-                          StoreProvider.of<AppState>(context)
-                              .dispatch(UpdateQuality(toChangeQuality));
+                        onChanged: (String? toChangeQuality) {
+                          StoreProvider.of<AppState>(context).dispatch(UpdateQueryFields(quality: toChangeQuality));
                         },
                         value: storeQuality,
                       ),
@@ -113,7 +111,7 @@ class _OptionsDrawerState extends State<OptionsDrawer> {
             padding: const EdgeInsets.all(16.0),
             child: TextButton(
               onPressed: () {
-                StoreProvider.of<AppState>(context).dispatch(GetMovies());
+                StoreProvider.of<AppState>(context).dispatch(const GetMoviesStart());
               },
               child: const Text('GET MOVIES!'),
             ),

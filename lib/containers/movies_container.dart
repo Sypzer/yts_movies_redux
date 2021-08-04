@@ -6,7 +6,7 @@ import 'package:yts_movies_redux/models/app_state.dart';
 import 'package:yts_movies_redux/models/movie.dart';
 
 class MovieContainer extends StatelessWidget {
-  const MovieContainer({Key key, @required this.builder}) : super(key: key);
+  const MovieContainer({Key? key, required this.builder}) : super(key: key);
 
   final ViewModelBuilder<BuiltList<Movie>> builder;
 

@@ -4,7 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:yts_movies_redux/models/app_state.dart';
 
 class IsLoadingContainer extends StatelessWidget {
-  const IsLoadingContainer({Key key, @required this.builder}) : super(key: key);
+  const IsLoadingContainer({Key? key, required this.builder}) : super(key: key);
 
   final ViewModelBuilder<bool> builder;
 

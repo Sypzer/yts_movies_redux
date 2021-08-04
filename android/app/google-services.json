@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "868173783711",
+    "project_id": "yts-movies-37db8",
+    "storage_bucket": "yts-movies-37db8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868173783711:android:2f0b7eb9f03323abfe38aa",
+        "android_client_info": {
+          "package_name": "com.example.yts_movies_redux"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868173783711-e2q8nfsb4jj5u9ae8j5r8imur7eu0onb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5CbK5ETZp78S1V87NEo_wqaw9c30KC7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868173783711-e2q8nfsb4jj5u9ae8j5r8imur7eu0onb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

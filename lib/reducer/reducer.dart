@@ -1,16 +1,25 @@
 import 'package:redux/redux.dart';
-import 'package:yts_movies_redux/actions/get_movies.dart';
-import 'package:yts_movies_redux/actions/update_genre.dart';
-import 'package:yts_movies_redux/actions/update_quality.dart';
+import 'package:yts_movies_redux/actions/index.dart';
 import 'package:yts_movies_redux/models/app_state.dart';
+import 'package:yts_movies_redux/models/auth/index.dart';
+import 'package:yts_movies_redux/reducer/auth_reducer.dart';
 
 Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
-  TypedReducer<AppState, GetMovies>(_getMovies),
+  _reducer,
+  TypedReducer<AppState, GetMoviesStart>(_getMovies),
   TypedReducer<AppState, GetMoviesSuccessful>(_getMoviesSuccessful),
   TypedReducer<AppState, GetMoviesError>(_getMoviesError),
-  TypedReducer<AppState, UpdateGenre>(_updateGenre),
-  TypedReducer<AppState, UpdateQuality>(_updateQuality),
+  TypedReducer<AppState, UpdateQueryFields>(_updateQueryFields),
+  TypedReducer<AppState, SetSelectedMovie$>(_setSelectedMovie),
+  TypedReducer<AppState, GetReviewsSuccessful>(_getReviewsSuccessful),
+  TypedReducer<AppState, GetUsersSuccessful>(_getUsersSuccessful),
 ]);
+
+AppState _reducer(AppState state, dynamic action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.auth = authReducer(state.auth, action).toBuilder();
+  });
+}
 
 AppState _getMovies(AppState state, GetMovies action) {
   final AppStateBuilder builder = state.toBuilder();
@@ -42,20 +51,40 @@ AppState _getMoviesError(AppState state, GetMoviesError action) {
   return builder.build();
 }
 
-AppState _updateGenre(AppState state, UpdateGenre action) {
-  final AppStateBuilder builder = state.toBuilder();
-  builder
-    ..genre = action.genre
-    ..nextPage = 1
-    ..mustResetMovies = true;
-  return builder.build();
+AppState _updateQueryFields(AppState state, UpdateQueryFields action) {
+  return state.rebuild((AppStateBuilder b) {
+    if (action.quality != null) {
+      b.mustResetMovies = true;
+      b.quality = action.quality;
+    } else {
+      b.mustResetMovies = true;
+      if (action.genre != null) {
+        b.genre = action.genre;
+      }
+    }
+  });
 }
 
-AppState _updateQuality(AppState state, UpdateQuality action) {
-  final AppStateBuilder builder = state.toBuilder();
-  builder
-    ..quality = action.quality
-    ..nextPage = 1
-    ..mustResetMovies = true;
-  return builder.build();
+AppState _setSelectedMovie(AppState state, SetSelectedMovie$ action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.selectedMovie = action.movieId;
+  });
+}
+
+AppState _getReviewsSuccessful(AppState state, GetReviewsSuccessful action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.reviews
+      ..clear()
+      ..addAll(action.reviews);
+  });
+}
+
+AppState _getUsersSuccessful(AppState state, GetUsersSuccessful action) {
+  return state.rebuild((AppStateBuilder b) {
+    b.users.clear();
+
+    for (final AppUser user in action.users) {
+      b.users[user.uid] = user;
+    }
+  });
 }
